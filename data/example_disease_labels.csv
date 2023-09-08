@@ -1,0 +1,27 @@
+disease_id,label
+EFO:0005809,type II hypersensitivity reaction disease
+EFO:0004264,vascular disease
+MONDO:0019751,autoinflammatory syndrome
+EFO:0000508,genetic disorder
+EFO:1001986,connective tissue disease
+MONDO:0023603,hereditary disorder of connective tissue
+EFO:0009676,musculoskeletal system disease
+MONDO:0019557,chilblain lupus
+MONDO:0004670,lupus erythematosus
+MONDO:0019293,skin vascular disease
+EFO:0000319,cardiovascular disease
+EFO:0005140,autoimmune disease
+EFO:1002003,hypersensitivity reaction disease
+EFO:0010285,integumentary system disease
+OTAR:0000018,"genetic, familial or congenital disease"
+MONDO:0100118,genetic skin disorder
+MONDO:0018782,type 1 interferonopathy
+EFO:0005755,rheumatic disease
+OTAR:0000006,musculoskeletal or connective tissue disease
+EFO:0000540,immune system disease
+EFO:0000701,skin disease
+MONDO:0015574,chronic cutaneous lupus erythematosus
+EFO:0003834,cutaneous lupus erythematosus
+EFO:0002461,skeletal system disease
+MONDO:0018827,familial chilblain lupus
+MONDO:0000603,autoimmune disorder of cardiovascular system
