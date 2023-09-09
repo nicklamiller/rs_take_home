@@ -1,5 +1,5 @@
 POETRY_RUN := poetry run
-FOLDERS= src
+FOLDERS= src tests
 PROJ= src
 NC=\033[0m # No Color
 
@@ -17,7 +17,6 @@ install: install-dev
 lint:
 		make autolint
 		make lint-flake8
-		make lint-mypy
 
 install-dev:
 		cp tools/pre-commit .git/hooks
@@ -31,10 +30,6 @@ autolint:
 lint-flake8:
 		@echo "\n${BLUE}Running flake8...${NC}\n"
 		@${POETRY_RUN} flake8 .
-
-lint-mypy:
-		@echo "\n${BLUE}Running mypy...${NC}\n"
-		${POETRY_RUN} mypy --show-error-codes ${PROJ}
 
 shell:
 		poetry shell
