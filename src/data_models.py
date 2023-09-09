@@ -27,7 +27,7 @@ class DiseaseHierarchy(BaseModelArbitrary):
     ) -> List[str]:
         child_diseases = self._get_child_diseases(disease_id)
         parent_diseases = self._get_parent_diseases(disease_id)
-        parent_child_diseases = [child_diseases, *parent_diseases]
+        parent_child_diseases = [*child_diseases, *parent_diseases]
         return list(set(parent_child_diseases))
 
     def _get_child_diseases(
