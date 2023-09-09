@@ -1,5 +1,5 @@
 POETRY_RUN := poetry run
-FOLDERS= src
+FOLDERS= src tests
 PROJ= src
 NC=\033[0m # No Color
 
