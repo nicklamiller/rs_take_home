@@ -25,37 +25,33 @@ class DiseaseHierarchy(BaseModelArbitrary):
         self,
         disease_id: str,
     ) -> List[str]:
-        child_diseases = self._get_child_diseases(disease_id)
-        parent_diseases = self._get_parent_diseases(disease_id)
+        child_diseases = self._get_related_diseases(
+            disease_id=disease_id,
+            reference_column=disease_id_parent_col,
+            column_to_check=disease_id_child_col,
+        )
+        parent_diseases = self._get_related_diseases(
+            disease_id=disease_id,
+            reference_column=disease_id_child_col,
+            column_to_check=disease_id_parent_col,
+        )
         parent_child_diseases = [*child_diseases, *parent_diseases]
         return list(set(parent_child_diseases))
 
-    def _get_child_diseases(
+    def _get_related_diseases(
         self,
+        *,
         disease_id: str,
-    ) -> DataFrame:
+        reference_column: str,
+        column_to_check: str,
+    ) -> List[str]:
         return (
             self.df
             .filter(
-                fx.col(disease_id_parent_col) == disease_id,
+                fx.col(reference_column) == disease_id,
             )
-            .select(disease_id_child_col)
+            .select(column_to_check)
             .toPandas()
-            [disease_id_child_col]
-            .tolist()
-        )
-
-    def _get_parent_diseases(
-        self,
-        disease_id: str,
-    ) -> DataFrame:
-        return (
-            self.df
-            .filter(
-                fx.col(disease_id_child_col) == disease_id,
-            )
-            .select(disease_id_parent_col)
-            .toPandas()
-            [disease_id_parent_col]
+            [column_to_check]
             .tolist()
         )
