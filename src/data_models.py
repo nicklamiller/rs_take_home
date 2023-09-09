@@ -4,8 +4,8 @@ from pydantic import BaseModel
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as fx
 
-disease_id_parent_col = 'disease_id_parent'
-disease_id_child_col = 'disease_id_child'
+_disease_id_parent_col = 'disease_id_parent'
+_disease_id_child_col = 'disease_id_child'
 
 
 class BaseModelArbitrary(BaseModel):
@@ -27,13 +27,13 @@ class DiseaseHierarchy(BaseModelArbitrary):
     ) -> List[str]:
         child_diseases = self._get_related_diseases(
             disease_id=disease_id,
-            reference_column=disease_id_parent_col,
-            column_to_check=disease_id_child_col,
+            reference_col=_disease_id_parent_col,
+            col_to_check=_disease_id_child_col,
         )
         parent_diseases = self._get_related_diseases(
             disease_id=disease_id,
-            reference_column=disease_id_child_col,
-            column_to_check=disease_id_parent_col,
+            reference_col=_disease_id_child_col,
+            col_to_check=_disease_id_parent_col,
         )
         parent_child_diseases = [*child_diseases, *parent_diseases]
         return list(set(parent_child_diseases))
@@ -42,16 +42,16 @@ class DiseaseHierarchy(BaseModelArbitrary):
         self,
         *,
         disease_id: str,
-        reference_column: str,
-        column_to_check: str,
+        reference_col: str,
+        col_to_check: str,
     ) -> List[str]:
         return (
             self.df
             .filter(
-                fx.col(reference_column) == disease_id,
+                fx.col(reference_col) == disease_id,
             )
-            .select(column_to_check)
+            .select(col_to_check)
             .toPandas()
-            [column_to_check]
+            [col_to_check]
             .tolist()
         )
