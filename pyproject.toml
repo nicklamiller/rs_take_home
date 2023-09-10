@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cicd-template"
+name = "rs_take_home"
 version = "0.1.0"
 description = "A template for CI/CD development tools."
 authors = ["nicklamiller <nicklamiller@gmail.com>"]

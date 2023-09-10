@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as fx
 
-from src.utils import spark_read_csv
+from rs_take_home.utils import spark_read_csv
 
 _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'

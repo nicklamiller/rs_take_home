@@ -3,8 +3,8 @@ import json
 import pytest
 from pyspark.sql import Row
 
-from src.association_counter import AssociationCounter
-from src.data_models import DiseaseHierarchy, GeneDiseaseAssociations
+from rs_take_home.association_counter import AssociationCounter
+from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
 
 
 @pytest.fixture

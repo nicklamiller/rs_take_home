@@ -2,7 +2,7 @@ from typing import List
 
 from pyspark.sql import DataFrame, Row, SparkSession
 
-from src.data_models import (
+from rs_take_home.data_models import (
     BaseModelArbitrary,
     DiseaseHierarchy,
     GeneDiseaseAssociations,

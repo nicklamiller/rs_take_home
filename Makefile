@@ -1,6 +1,6 @@
 POETRY_RUN := poetry run
-FOLDERS= src tests
-PROJ= src
+FOLDERS= rs_take_home tests
+PROJ= rs_take_home
 NC=\033[0m # No Color
 
 .PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \
