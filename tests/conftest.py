@@ -71,12 +71,7 @@ def gene_disease_associations(
 
 @pytest.fixture
 def association_counter(
-    disease_hierarchy,
-    gene_disease_associations,
+    filepaths_config,
     spark_session,
 ):
-    return AssociationCounter(
-        disease_hierarchy=disease_hierarchy,
-        gene_disease_associations=gene_disease_associations,
-        spark=spark_session,
-    )
+    return AssociationCounter.from_config(filepaths_config, spark_session)
