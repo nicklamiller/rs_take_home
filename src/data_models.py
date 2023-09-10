@@ -1,8 +1,10 @@
 from typing import List
 
 from pydantic import BaseModel
-from pyspark.sql import DataFrame
+from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as fx
+
+from src.utils import spark_read_csv
 
 _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'
@@ -20,6 +22,10 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
 
 class DiseaseHierarchy(BaseModelArbitrary):
     df: DataFrame
+
+    @classmethod
+    def from_filepath(cls, filepath: str, spark: SparkSession):
+        return cls(df=spark_read_csv(filepath, spark))
 
     def get_children_and_parent_diseases(
         self,
