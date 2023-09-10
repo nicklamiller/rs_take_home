@@ -1,7 +1,10 @@
 import json
 
 import pytest
+from pyspark.sql import Row
+from pyspark_test import assert_pyspark_df_equal
 
+from src.association_counter import AssociationCounter
 from src.data_models import DiseaseHierarchy, GeneDiseaseAssociations
 
 
@@ -22,6 +25,14 @@ def gene_disease_queries():
         ('ENSG00000213689', 'MONDO:0019557'),
         ('ENSG00000184584', 'MONDO:0018827'),
     ]
+
+
+@pytest.fixture
+def query_counts_df(spark_session):
+    return spark_session.createDataFrame([
+        Row(Query='(ENSG00000213689, MONDO:0019557)', Result=2),
+        Row(Query='(ENSG00000184584, MONDO:0018827)', Result=1),
+    ])
 
 
 @pytest.fixture
@@ -59,6 +70,19 @@ def gene_disease_associations(
     )
 
 
+@pytest.fixture
+def association_counter(
+    disease_hierarchy,
+    gene_disease_associations,
+    spark_session,
+):
+    return AssociationCounter(
+        disease_hierarchy=disease_hierarchy,
+        gene_disease_associations=gene_disease_associations,
+        spark=spark_session,
+    )
+
+
 def test_get_child_and_parent_diseases(
     disease_hierarchy,
     efo_0005809_diseases,
@@ -90,3 +114,14 @@ def test_count_associations(
         )
     )
     assert disease_count == 2
+
+
+def test_count_all_queries(
+    gene_disease_queries,
+    association_counter,
+    query_counts_df,
+):
+    actual_query_counts_df = (
+        association_counter.count_all_queries(gene_disease_queries)
+    )
+    assert_pyspark_df_equal(actual_query_counts_df, query_counts_df)
