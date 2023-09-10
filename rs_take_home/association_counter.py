@@ -14,6 +14,20 @@ class AssociationCounter(BaseModelArbitrary):
     gene_disease_associations: GeneDiseaseAssociations
     spark: SparkSession
 
+    @classmethod
+    def from_config(cls, config: dict, spark: SparkSession):
+        disease_hierarchy = DiseaseHierarchy.from_filepath(
+            config['disease_hierarchy'], spark,
+        )
+        gene_disease_associations = GeneDiseaseAssociations.from_filepath(
+            config['gene_disease_associations'], spark,
+        )
+        return cls(
+            disease_hierarchy=disease_hierarchy,
+            gene_disease_associations=gene_disease_associations,
+            spark=spark,
+        )
+
     def count_all_queries(
         self,
         queries: List[tuple],
