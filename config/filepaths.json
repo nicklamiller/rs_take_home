@@ -1,0 +1,4 @@
+{
+    "gene_disease_associations": "data/example_associations.csv",
+    "disease_hierarchy": "data/example_disease_hierarchy.csv"
+}
