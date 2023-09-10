@@ -1,11 +1,15 @@
 from typing import List
 
 from pydantic import BaseModel
-from pyspark.sql import DataFrame
+from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as fx
+
+from src.utils import spark_read_csv
 
 _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'
+_disease_id_col = 'disease_id'
+_gene_id_col = 'gene_id'
 
 
 class BaseModelArbitrary(BaseModel):
@@ -17,11 +21,35 @@ class BaseModelArbitrary(BaseModel):
 class GeneDiseaseAssociations(BaseModelArbitrary):
     df: DataFrame
 
+    @classmethod
+    def from_filepath(cls, filepath: str, spark: SparkSession):
+        return cls(df=spark_read_csv(filepath, spark))
+
+    def count_associations(
+        self,
+        *,
+        list_disease_ids: List[str],
+        gene_id: str,
+    ) -> int:
+        return (
+            self.df
+            .filter(
+                (fx.col(_disease_id_col).isin(list_disease_ids))  # noqa: E501, WPS465
+                & (fx.col(_gene_id_col) == gene_id),
+            )
+            .distinct()
+            .count()
+        )
+
 
 class DiseaseHierarchy(BaseModelArbitrary):
     df: DataFrame
 
-    def get_children_and_parent_diseases(
+    @classmethod
+    def from_filepath(cls, filepath: str, spark: SparkSession):
+        return cls(df=spark_read_csv(filepath, spark))
+
+    def get_child_and_parent_diseases(
         self,
         disease_id: str,
     ) -> List[str]:
@@ -35,7 +63,7 @@ class DiseaseHierarchy(BaseModelArbitrary):
             reference_col=_disease_id_child_col,
             col_to_check=_disease_id_parent_col,
         )
-        parent_child_diseases = [*child_diseases, *parent_diseases]
+        parent_child_diseases = [disease_id, *child_diseases, *parent_diseases]
         return list(set(parent_child_diseases))
 
     def _get_related_diseases(
