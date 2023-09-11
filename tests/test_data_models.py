@@ -1,3 +1,27 @@
+import pytest
+from pydantic import ValidationError
+from pyspark.sql import Row
+
+from rs_take_home.data_models import GeneDiseaseAssociations
+
+
+@pytest.fixture
+def wrong_gene_disease_associations_df(spark_session):
+    return (
+        spark_session.createDataFrame([
+            Row(not_disease_id='made_up_id'),
+            Row(not_disease_id='some_other_id'),
+        ])
+    )
+
+
+def test_disease_hierarchy_check_schema(
+    wrong_gene_disease_associations_df,
+):
+    with pytest.raises(ValidationError):
+        GeneDiseaseAssociations(df=wrong_gene_disease_associations_df)
+
+
 def test_get_child_and_parent_diseases(
     disease_hierarchy,
     mondo_0019557_diseases,
