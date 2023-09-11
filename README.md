@@ -85,9 +85,9 @@ One can also supply their own input:
     queries = [('ENSG00000101342', 'MONDO:0019557'), ('ENSG00000101347', 'MONDO:0015574')]
 
     association_counts = get_association_counts(
-        gene_disease_associations_df,
-        disease_hierarchy_df,
-        queries,
+        gene_disease_associations_df=gene_disease_associations_df,
+        disease_hierarchy_df=disease_hierarchy_df,
+        queries=queries,
     )
     association_counts.show()
 

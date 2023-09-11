@@ -38,6 +38,7 @@ _disease_hierarchy_df = (
 
 
 def get_association_counts(
+    *,
     gene_disease_associations_df: DataFrame = _gene_disease_associations_df,
     disease_hierarchy_df: DataFrame = _disease_hierarchy_df,
     queries: List[tuple] = _gene_disease_queries,
