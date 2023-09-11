@@ -1,10 +1,10 @@
-# Table of Contents
-* [Problem Statement](#problem_statement)
+## Table of Contents
+* [Problem](#problem)
 * [Solution](#solution)
 
 ---
 
-<a name="problem_statement"/>
+<a name="problem"/>
 
 ## Problem
 ### Introduction
