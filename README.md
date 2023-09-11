@@ -1,6 +1,7 @@
 ## Table of Contents
 * [Problem](#problem)
 * [Solution](#solution)
+* [Further Discussion](#further_discussion)
 
 ---
 
@@ -75,7 +76,7 @@ Then all one needs to do is import `get_association_counts`:
 
 The function call above will run with defaults, which are the data files supplied in the `data` folder and the example queries given in the problem statement. This will return the example output also listed in the problem statement.
 
-One can also supply their own spark dataframes to and get the association counts:
+One can also supply their own spark dataframes too and get the association counts:
 
 
     gene_disease_associations_df = spark.read.csv(...)
@@ -88,3 +89,22 @@ One can also supply their own spark dataframes to and get the association counts
         queries,
     )
     association_counts.show()
+
+
+<a name="further_discussion"/>
+
+## Further Discussion
+
+### Considerations:
+
+* Corruped data/queries:
+
+There is built in validation when one supplies their own spark dataframes, so these dataframes will have to contain the correct columns and datatypes as specified in `rs_take_home.schemas` (they can include additional columns as well). Given more time I would like to add validation for the Ensembl and EFO ID's for the queries
+
+* Optimize solution:
+
+This code is written using Pyspark. Because it was ran on my laptop, it is ran in SingleNode cluster mode, but one could supplie a SparkSession with custom configurations/multiple workers to the `get_association_counts` function and could reap the benefit of a multi-node computing configuration.
+
+* Parallelization:
+
+As mentioned above, one could choose a different spark session configuration that involves multiple nodes/workers and pass this spark session to the `get_association_counts` function to better parallelize the code.
