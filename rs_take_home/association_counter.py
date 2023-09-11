@@ -56,7 +56,6 @@ class AssociationCounter(BaseModelArbitrary):
             self.gene_disease_associations
             .count_associations(
                 list_disease_ids=child_parent_diseases,
-                gene_id=gene_id,
             )
         )
         query = f'({gene_id}, {disease_id})'

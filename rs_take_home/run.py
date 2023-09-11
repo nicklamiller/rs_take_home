@@ -19,8 +19,10 @@ with open('config/filepaths.json') as json_file:
 
 
 _default_gene_disease_queries = [
+    ('ENSG00000101342', 'MONDO:0019557'),
+    ('ENSG00000101347', 'MONDO:0015574'),
     ('ENSG00000213689', 'MONDO:0019557'),
-    ('ENSG00000184584', 'MONDO:0018827'),
+    ('ENSG00000213689', 'MONDO:0018827'),
 ]
 
 

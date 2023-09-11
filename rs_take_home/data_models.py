@@ -29,14 +29,13 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
         self,
         *,
         list_disease_ids: List[str],
-        gene_id: str,
     ) -> int:
         return (
             self.df
             .filter(
-                (fx.col(_disease_id_col).isin(list_disease_ids))  # noqa: E501, WPS465
-                & (fx.col(_gene_id_col) == gene_id),
+                fx.col(_disease_id_col).isin(list_disease_ids),
             )
+            .select(_gene_id_col)
             .distinct()
             .count()
         )
