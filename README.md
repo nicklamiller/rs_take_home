@@ -82,7 +82,12 @@ And then these commands in an interactive python session to use `get_association
 
     gene_disease_associations_path = 'data/example_associations.csv'
     disease_hierarchy_path = 'data/example_disease_hierarchy.csv'
-    queries = [('ENSG00000101342', 'MONDO:0019557'), ('ENSG00000101347', 'MONDO:0015574')]
+    queries = [
+        ('ENSG00000101342', 'MONDO:0019557'),
+        ('ENSG00000101347', 'MONDO:0015574'),
+        ('ENSG00000213689', 'MONDO:0019557'),
+        ('ENSG00000213689', 'MONDO:0018827'),
+    ]
 
     association_counts = get_association_counts(
         gene_disease_associations_path=gene_disease_associations_path,
