@@ -119,6 +119,6 @@ This repo is made from a [CI/CD template](https://github.com/nicklamiller/CICD_t
 * Automated tests:
   * linting - flake8 and wemake-python-styleguide are used
   * unit tests - pytest frame work for testing public methods
-* virtual environment management/ package building - poetry is used to manage dependencies and to build the package using masonry
+* virtual environment management/ package building - poetry is used to manage dependencies and to build this repo as a package using masonry
 * precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as calling the automated linter
 * input/data validation - pydantic is used to both validate attributes of classes upon instantiation, and to validate the contents of those attributes. In this case I validate the schemas of the input dataframes.
