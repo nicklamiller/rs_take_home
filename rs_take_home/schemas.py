@@ -1,3 +1,4 @@
+"""Schemas for needed inputs."""
 disease_hierarchy_schema = [
     ('disease_id_child', 'string'),
     ('disease_id_parent', 'string'),

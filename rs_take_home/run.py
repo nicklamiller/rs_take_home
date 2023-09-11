@@ -1,3 +1,4 @@
+"""Main entrypoint to count disease associations based on queries."""
 from typing import List
 
 from pyspark.sql import DataFrame, SparkSession
@@ -31,6 +32,17 @@ def get_association_counts(
     queries: List[tuple] = _gene_disease_queries,
     spark: SparkSession = None,
 ) -> DataFrame:
+    """Get disease gene association counts for all queries.
+
+    Args:
+        gene_disease_associations_path (str): filepath to associations
+        disease_hierarchy_path (str): filepath to disease hierarchy
+        queries (List[tuple]): list of (gene_id, diseaes_id)
+        spark (SparkSession): spark session allowing custom spark configs
+
+    Returns:
+        association counts (DataFrame): dataframe summarizing counts
+    """
     if not spark:
         spark = _create_spark_session()
     disease_hierarchy = DiseaseHierarchy.from_filepath(

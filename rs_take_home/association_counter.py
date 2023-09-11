@@ -1,3 +1,4 @@
+"""Count Associations from inputs."""
 from typing import List
 
 from pyspark.sql import DataFrame, Row, SparkSession
@@ -10,12 +11,23 @@ from rs_take_home.data_models import (
 
 
 class AssociationCounter(BaseModelArbitrary):
+    """Gene and disease association counter."""
+
     disease_hierarchy: DiseaseHierarchy
     gene_disease_associations: GeneDiseaseAssociations
     spark: SparkSession
 
     @classmethod
     def from_config(cls, config: dict, spark: SparkSession):
+        """Instantiate from filepath config.
+
+        Args:
+            config (dict): dict with filepaths for inputs
+            spark (SparkSession): spark session allowing custom spark configs
+
+        Returns:
+            AssociationCounter
+        """
         disease_hierarchy = DiseaseHierarchy.from_filepath(
             config['disease_hierarchy'], spark,
         )
@@ -32,6 +44,14 @@ class AssociationCounter(BaseModelArbitrary):
         self,
         queries: List[tuple],
     ) -> DataFrame:
+        """Count all supplied gene-disease queries.
+
+        Args:
+            queries (List[tuple]): list of gene_id and disease_id tuples
+
+        Returns:
+            DataFrame: dataframe with queries and counts.
+        """
         all_query_counts = []
         for query in queries:
             gene_id, disease_id = query

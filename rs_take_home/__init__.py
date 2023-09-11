@@ -1,1 +1,1 @@
-"""Put project description here."""
+"""RS take home test solution."""
