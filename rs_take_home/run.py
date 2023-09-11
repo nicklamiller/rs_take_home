@@ -4,7 +4,11 @@ from typing import List
 from pyspark.sql import DataFrame, SparkSession
 
 from rs_take_home.association_counter import AssociationCounter
-from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
+from rs_take_home.data_models import (
+    DiseaseHierarchy,
+    GeneDiseaseAssociations,
+    Queries,
+)
 
 
 def _create_spark_session() -> SparkSession:
@@ -29,7 +33,7 @@ def get_association_counts(
     *,
     gene_disease_associations_path: str,
     disease_hierarchy_path: str,
-    queries: List[tuple] = _gene_disease_queries,
+    list_of_queries: List[tuple] = _gene_disease_queries,
     spark: SparkSession = None,
 ) -> DataFrame:
     """Get disease gene association counts for all queries.
@@ -37,7 +41,7 @@ def get_association_counts(
     Args:
         gene_disease_associations_path (str): filepath to associations
         disease_hierarchy_path (str): filepath to disease hierarchy
-        queries (List[tuple]): list of (gene_id, diseaes_id)
+        list_of_queries (List[tuple]): list of (gene_id, diseaes_id)
         spark (SparkSession): spark session allowing custom spark configs
 
     Returns:
@@ -48,12 +52,14 @@ def get_association_counts(
     disease_hierarchy = DiseaseHierarchy.from_filepath(
         disease_hierarchy_path, spark,
     )
+    queries = Queries(queries=list_of_queries, spark=spark)
     gene_disease_associations = GeneDiseaseAssociations.from_filepath(
         gene_disease_associations_path, spark,
     )
     association_counter = AssociationCounter(
         disease_hierarchy=disease_hierarchy,
         gene_disease_associations=gene_disease_associations,
+        queries=queries,
         spark=spark,
     )
-    return association_counter.count_all_queries(queries)
+    return association_counter.count_associations()

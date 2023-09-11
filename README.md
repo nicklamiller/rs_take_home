@@ -94,7 +94,7 @@ And then these commands in an interactive python session to use `get_association
     association_counts = get_association_counts(
         gene_disease_associations_path=gene_disease_associations_path,
         disease_hierarchy_path=disease_hierarchy_path,
-        queries=queries,
+        list_of_queries=queries,
     )
     association_counts.show()
 
@@ -115,6 +115,8 @@ There is built in validation when one supplies their own data/filepaths to data,
 * Optimize solution:
 
 This code is written using Pyspark. Because it was ran on my laptop, it is ran in SingleNode cluster mode, but one could supply a SparkSession with custom configurations that include multiple workers and/or a higher spec driver/workers. This spark session can then be passed as an argument to the `get_association_counts` function to help scale this solution.
+
+I chose to make input queries a spark dataframe so that joins and groupBy operations needed to count associations could be distributed across workers if this solution were ran with multiple workers. I also assume queries are relatively small compared to disease hierarchy and associations data, so I broadcast the queries dataframe when joining with other other tables to prevent unnecessary shuffling between workers.
 
 * Parallelization:
 

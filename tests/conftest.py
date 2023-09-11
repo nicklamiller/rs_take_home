@@ -4,7 +4,11 @@ import pytest
 from pyspark.sql import Row
 
 from rs_take_home.association_counter import AssociationCounter
-from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
+from rs_take_home.data_models import (
+    DiseaseHierarchy,
+    GeneDiseaseAssociations,
+    Queries,
+)
 
 
 @pytest.fixture
@@ -32,10 +36,15 @@ def gene_disease_queries():
 def query_counts_df(spark_session):
     return spark_session.createDataFrame([
         Row(Query='(ENSG00000101342, MONDO:0019557)', Result=4),
-        Row(Query='(ENSG00000101347, MONDO:0015574)', Result=3),
         Row(Query='(ENSG00000213689, MONDO:0019557)', Result=4),
+        Row(Query='(ENSG00000101347, MONDO:0015574)', Result=3),
         Row(Query='(ENSG00000213689, MONDO:0018827)', Result=3),
     ])
+
+
+@pytest.fixture
+def queries(gene_disease_queries, spark_session):
+    return Queries(queries=gene_disease_queries, spark=spark_session)
 
 
 @pytest.fixture
@@ -76,6 +85,11 @@ def gene_disease_associations(
 @pytest.fixture
 def association_counter(
     filepaths_config,
+    queries,
     spark_session,
 ):
-    return AssociationCounter.from_config(filepaths_config, spark_session)
+    return AssociationCounter.from_config(
+        filepaths_config,
+        queries,
+        spark_session,
+    )

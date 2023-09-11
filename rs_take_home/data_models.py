@@ -12,12 +12,45 @@ _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'
 _disease_id_col = 'disease_id'
 _gene_id_col = 'gene_id'
+_query_col = 'Query'
 
 
 class BaseModelArbitrary(BaseModel):  # noqa: D101
 
     class Config:  # noqa: D106, WPS306, WPS431
         arbitrary_types_allowed = True
+
+
+class Queries(BaseModelArbitrary):
+    """Gene and disease queries."""
+
+    queries: List[tuple]
+    spark: SparkSession
+
+    @property
+    def df(self) -> DataFrame:
+        """Queries turned into dataframe with useful columns.
+
+        Returns:
+            DataFrame: dataframe representation of queries
+        """
+        return (
+            self.spark.createDataFrame(
+                data=self.queries,
+                schema=[_gene_id_col, _disease_id_col],
+            )
+            .withColumn(
+                _query_col,
+                fx.concat(
+                    fx.lit('('),
+                    fx.col(_gene_id_col),
+                    fx.lit(', '),
+                    fx.col(_disease_id_col),
+                    fx.lit(')'),
+                ),
+            )
+            .select(_query_col, _gene_id_col, _disease_id_col)
+        )
 
 
 class GeneDiseaseAssociations(BaseModelArbitrary):
