@@ -87,6 +87,7 @@ And then these commands in an interactive python session to use `get_association
     association_counts = get_association_counts(
         gene_disease_associations_path=gene_disease_associations_path,
         disease_hierarchy_path=disease_hierarchy_path,
+        queries=queries,
     )
     association_counts.show()
 
