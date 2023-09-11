@@ -8,12 +8,12 @@ from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
 
 
 @pytest.fixture
-def efo_0005809_diseases():
+def mondo_0019557_diseases():
     return [
-        'EFO:0005809',
-        'EFO:0000540',
-        'MONDO:0004670',
-        'EFO:1002003',
+        'MONDO:0019557',
+        'MONDO:0015574',
+        'MONDO:0018827',
+        'MONDO:0019293',
         'MONDO:0000603',
     ]
 
@@ -21,16 +21,20 @@ def efo_0005809_diseases():
 @pytest.fixture
 def gene_disease_queries():
     return [
+        ('ENSG00000101342', 'MONDO:0019557'),
+        ('ENSG00000101347', 'MONDO:0015574'),
         ('ENSG00000213689', 'MONDO:0019557'),
-        ('ENSG00000184584', 'MONDO:0018827'),
+        ('ENSG00000213689', 'MONDO:0018827'),
     ]
 
 
 @pytest.fixture
 def query_counts_df(spark_session):
     return spark_session.createDataFrame([
-        Row(Query='(ENSG00000213689, MONDO:0019557)', Result=2),
-        Row(Query='(ENSG00000184584, MONDO:0018827)', Result=1),
+        Row(Query='(ENSG00000101342, MONDO:0019557)', Result=4),
+        Row(Query='(ENSG00000101347, MONDO:0015574)', Result=3),
+        Row(Query='(ENSG00000213689, MONDO:0019557)', Result=4),
+        Row(Query='(ENSG00000213689, MONDO:0018827)', Result=3),
     ])
 
 

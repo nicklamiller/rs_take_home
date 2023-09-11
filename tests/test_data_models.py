@@ -1,13 +1,13 @@
 def test_get_child_and_parent_diseases(
     disease_hierarchy,
-    efo_0005809_diseases,
+    mondo_0019557_diseases,
 ):
-    children_parent_diseases = (
+    child_parent_diseases = (
         disease_hierarchy
-        .get_child_and_parent_diseases('EFO:0005809')
+        .get_child_and_parent_diseases('MONDO:0019557')
     )
     is_child_parent_disease = [
-        _ in efo_0005809_diseases for _ in children_parent_diseases
+        _ in mondo_0019557_diseases for _ in child_parent_diseases
     ]
     assert all(is_child_parent_disease)
 
@@ -17,15 +17,14 @@ def test_count_associations(
     disease_hierarchy,
     gene_disease_associations,
 ):
-    children_parent_diseases = (
+    child_parent_diseases = (
         disease_hierarchy
         .get_child_and_parent_diseases(gene_disease_queries[0][1])
     )
     disease_count = (
         gene_disease_associations
         .count_associations(
-            list_disease_ids=children_parent_diseases,
-            gene_id=gene_disease_queries[0][0],
+            list_disease_ids=child_parent_diseases,
         )
     )
-    assert disease_count == 2
+    assert disease_count == 4
