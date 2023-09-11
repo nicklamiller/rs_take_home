@@ -1,10 +1,11 @@
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as fx
 
-from rs_take_home.utils import spark_read_csv
+from rs_take_home import schemas
+from rs_take_home.utils import check_has_required_schema_subset, spark_read_csv
 
 _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'
@@ -25,6 +26,15 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
     def from_filepath(cls, filepath: str, spark: SparkSession):
         return cls(df=spark_read_csv(filepath, spark))
 
+    @validator('df')
+    @classmethod
+    def check_schema(cls, value):
+        check_has_required_schema_subset(
+            value,
+            schemas.gene_disease_associations_schema,
+        )
+        return value
+
     def count_associations(
         self,
         *,
@@ -43,6 +53,15 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
 
 class DiseaseHierarchy(BaseModelArbitrary):
     df: DataFrame
+
+    @validator('df')
+    @classmethod
+    def check_schema(cls, value):
+        check_has_required_schema_subset(
+            value,
+            schemas.disease_hierarchy_schema,
+        )
+        return value
 
     @classmethod
     def from_filepath(cls, filepath: str, spark: SparkSession):
