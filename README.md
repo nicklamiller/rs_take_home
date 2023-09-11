@@ -75,7 +75,7 @@ Then all one needs to do is import `get_association_counts` and supply filepaths
     curl -o "data/example_disease_hierarchy.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/add-explanation-to-readme/data/example_disease_hierarchy.csv
 
 
-And then these commands in an interactive python session to use the function to count associations:
+And then these commands in an interactive python session to use `get_association_counts`:
 
     from rs_take_home.run import get_association_counts
 
