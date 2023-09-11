@@ -72,7 +72,7 @@ Then all one needs to do is import `get_association_counts` and supply filepaths
 
     mkdir data
     curl -o "data/example_associations.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/add-explanation-to-readme/data/example_associations.csv
-    curl -o "data/example_disease_hierarchy.csv" https://github.com/nicklamiller/rs_take_home/blob/add-explanation-to-readme/data/example_disease_hierarchy.csv
+    curl -o "data/example_disease_hierarchy.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/add-explanation-to-readme/data/example_disease_hierarchy.csv
 
 
 And then these commands in an interactive python session to use the function to count associations:
