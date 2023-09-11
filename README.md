@@ -91,7 +91,7 @@ And then these commands in an interactive python session to use the function to 
     )
     association_counts.show()
 
-If one leaves queries empty, it will run with the default queries givein in the problem statement. This will return the example output also listed in the problem statement.
+If one leaves queries empty, it will run with the default queries given in the problem statement. This will return the example output also listed in the problem statement.
 
 ---
 
