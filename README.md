@@ -91,6 +91,7 @@ One can also supply their own spark dataframes too and get the association count
     )
     association_counts.show()
 
+---
 
 <a name="further_discussion"/>
 
@@ -118,5 +119,5 @@ This repo is made from a [CI/CD template](https://github.com/nicklamiller/CICD_t
 * Automated tests:
   * linting - flake8 and wemake-python-styleguide are used
   * unit tests - pytest frame work for testing public methods
-* virtual environment management - poetry is used to manage dependencies and to build the package using masonry
-* precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as linting
+* virtual environment management/ package building - poetry is used to manage dependencies and to build the package using masonry
+* precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as calling the automated linter
