@@ -73,8 +73,8 @@ To run the solution to this test, one can install this repo as a package:
 Then all one needs to do is import `get_association_counts` and supply filepaths to data (and optionally custom queries). If you don't have the data readily available feel free to run these commands to get the data locally:
 
     mkdir data
-    curl -o "data/example_associations.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/add-explanation-to-readme/data/example_associations.csv
-    curl -o "data/example_disease_hierarchy.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/add-explanation-to-readme/data/example_disease_hierarchy.csv
+    curl -o "data/example_associations.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/main/data/example_associations.csv
+    curl -o "data/example_disease_hierarchy.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/main/data/example_disease_hierarchy.csv
 
 
 And then these commands in an interactive python session to use `get_association_counts`:
