@@ -1,6 +1,6 @@
 # Table of Contents
-[Problem Statement](#problem_statement)
-[Solution](#solution)
+* [Problem Statement](#problem_statement)
+* [Solution](#solution)
 
 ---
 
