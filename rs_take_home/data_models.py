@@ -1,4 +1,5 @@
 """Data models for inputs."""
+from functools import partial
 from typing import List
 
 from pydantic import BaseModel, validator
@@ -12,12 +13,65 @@ _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'
 _disease_id_col = 'disease_id'
 _gene_id_col = 'gene_id'
+_query_col = 'Query'
+_query_col_index_map = {
+    _disease_id_col: 0,
+    _gene_id_col:  1
+}
 
 
 class BaseModelArbitrary(BaseModel):  # noqa: D101
 
     class Config:  # noqa: D106, WPS306, WPS431
         arbitrary_types_allowed = True
+
+
+class Queries(BaseModelArbitrary):
+
+    queries: List[tuple]
+    spark: SparkSession
+
+    @property
+    def df_queries_only(self) -> DataFrame:
+        return (
+            self.spark.createDataFrame(
+                data=self.queries,
+                schema=[_gene_id_col, _disease_id_col],
+            )
+        )
+    
+    def create_df(self) -> DataFrame:
+        return (
+            self.df_queries_only
+            .transform(
+                partial(
+                    self._parse_id_from_query,
+                    id_to_parse=_disease_id_col,
+                )
+            )
+            .transform(
+                partial(
+                    self._parse_id_from_query,
+                    id_to_parse=_gene_id_col,
+                )
+            )
+        )
+
+    
+    def _parse_id_from_query(df: DataFrame, id_to_parse: str) -> DataFrame:
+        return (
+            df
+            .withColumn(
+                id_to_parse,
+                fx.split(
+                    fx.col(_query_col), ',',
+                ).getItem(_query_col_index_map[id_to_parse])
+            )
+            .withColumn(
+                id_to_parse,
+                fx.regexp_replace(fx.trim(id_to_parse), '(|)')
+            )
+        )
 
 
 class GeneDiseaseAssociations(BaseModelArbitrary):

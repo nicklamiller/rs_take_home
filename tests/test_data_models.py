@@ -2,7 +2,11 @@ import pytest
 from pydantic import ValidationError
 from pyspark.sql import Row
 
-from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
+from rs_take_home.data_models import (
+    DiseaseHierarchy,
+    GeneDiseaseAssociations,
+    Queries,
+)
 
 
 @pytest.fixture
@@ -13,6 +17,13 @@ def wrong_schema_df(spark_session):
             Row(not_disease_id='some_other_id'),
         ])
     )
+
+@pytest.fixture
+def queries(gene_disease_queries, spark_session):
+    return Queries(queries=gene_disease_queries, spark=spark_session)
+
+
+def test_queries_df_raw_
 
 
 def test_gene_disease_associations_check_schema(wrong_schema_df):
