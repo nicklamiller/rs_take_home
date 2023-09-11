@@ -2,11 +2,11 @@ import pytest
 from pydantic import ValidationError
 from pyspark.sql import Row
 
-from rs_take_home.data_models import GeneDiseaseAssociations
+from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
 
 
 @pytest.fixture
-def wrong_gene_disease_associations_df(spark_session):
+def wrong_schema_df(spark_session):
     return (
         spark_session.createDataFrame([
             Row(not_disease_id='made_up_id'),
@@ -15,11 +15,14 @@ def wrong_gene_disease_associations_df(spark_session):
     )
 
 
-def test_disease_hierarchy_check_schema(
-    wrong_gene_disease_associations_df,
-):
+def test_gene_disease_associations_check_schema(wrong_schema_df):
     with pytest.raises(ValidationError):
-        GeneDiseaseAssociations(df=wrong_gene_disease_associations_df)
+        GeneDiseaseAssociations(df=wrong_schema_df)
+
+
+def test_disease_hierarchy_check_schema(wrong_schema_df):
+    with pytest.raises(ValidationError):
+        DiseaseHierarchy(df=wrong_schema_df)
 
 
 def test_get_child_and_parent_diseases(

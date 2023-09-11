@@ -54,6 +54,15 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
 class DiseaseHierarchy(BaseModelArbitrary):
     df: DataFrame
 
+    @validator('df')
+    @classmethod
+    def check_schema(cls, value):
+        check_has_required_schema_subset(
+            value,
+            schemas.disease_hierarchy_schema,
+        )
+        return value
+
     @classmethod
     def from_filepath(cls, filepath: str, spark: SparkSession):
         return cls(df=spark_read_csv(filepath, spark))
