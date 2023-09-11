@@ -22,5 +22,5 @@ def check_has_required_schema_subset(
     for column_and_type in schema:
         if column_and_type not in df.dtypes:
             raise ValueError(
-                f'{column_and_type} needs to be in gene_disease_associations',
+                f'{column_and_type} needs to be in input df schema',
             )
