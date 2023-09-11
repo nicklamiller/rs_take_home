@@ -87,11 +87,10 @@ And then these commands in an interactive python session to use the function to 
     association_counts = get_association_counts(
         gene_disease_associations_path=gene_disease_associations_path,
         disease_hierarchy_path=disease_hierarchy_path,
-        queries=queries,
     )
     association_counts.show()
 
-If one leaves queries empty, it will run with the default queries given in the problem statement. This will return the example output also listed in the problem statement.
+If can also supply queries as an argument with a list of tuples that correspond to custom queries. The default queries used here are those specified in the problem statement and will return the example output also listed in the problem statement.
 
 ---
 
