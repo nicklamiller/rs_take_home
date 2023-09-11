@@ -22,12 +22,18 @@ class BaseModelArbitrary(BaseModel):  # noqa: D101
 
 
 class Queries(BaseModelArbitrary):
+    """Gene and disease queries."""
 
     queries: List[tuple]
     spark: SparkSession
 
     @property
     def df(self) -> DataFrame:
+        """Queries turned into dataframe with useful columns.
+
+        Returns:
+            DataFrame: dataframe representation of queries
+        """
         return (
             self.spark.createDataFrame(
                 data=self.queries,

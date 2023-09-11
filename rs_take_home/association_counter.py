@@ -53,6 +53,11 @@ class AssociationCounter(BaseModelArbitrary):
         )
 
     def count_associations(self) -> DataFrame:
+        """Count associations based on queries.
+
+        Returns:
+            DataFrame: dataframe with queries and counts
+        """
         queries_gene_ids_added = self._add_related_diseases_and_gene_ids()
         return (
             queries_gene_ids_added
