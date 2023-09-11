@@ -7,6 +7,7 @@ from rs_take_home.data_models import (
     BaseModelArbitrary,
     DiseaseHierarchy,
     GeneDiseaseAssociations,
+    Queries,
 )
 
 
@@ -15,14 +16,16 @@ class AssociationCounter(BaseModelArbitrary):
 
     disease_hierarchy: DiseaseHierarchy
     gene_disease_associations: GeneDiseaseAssociations
+    queries: Queries
     spark: SparkSession
 
     @classmethod
-    def from_config(cls, config: dict, spark: SparkSession):
+    def from_config(cls, config: dict, queries: Queries, spark: SparkSession):
         """Instantiate from filepath config.
 
         Args:
             config (dict): dict with filepaths for inputs
+            queries (Queries): contains information on queries
             spark (SparkSession): spark session allowing custom spark configs
 
         Returns:
@@ -37,6 +40,7 @@ class AssociationCounter(BaseModelArbitrary):
         return cls(
             disease_hierarchy=disease_hierarchy,
             gene_disease_associations=gene_disease_associations,
+            queries=queries,
             spark=spark,
         )
 

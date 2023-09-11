@@ -3,11 +3,7 @@ from pydantic import ValidationError
 from pyspark.sql import Row
 from pyspark_test import assert_pyspark_df_equal
 
-from rs_take_home.data_models import (
-    DiseaseHierarchy,
-    GeneDiseaseAssociations,
-    Queries,
-)
+from rs_take_home.data_models import DiseaseHierarchy, GeneDiseaseAssociations
 from rs_take_home.utils import spark_read_csv
 
 
@@ -24,11 +20,6 @@ def wrong_schema_df(spark_session):
 @pytest.fixture
 def queries_df(spark_session):
     return spark_read_csv('tests/fixtures/queries_df.csv', spark_session)
-
-
-@pytest.fixture
-def queries(gene_disease_queries, spark_session):
-    return Queries(queries=gene_disease_queries, spark=spark_session)
 
 
 def test_queries_df(queries, queries_df):
