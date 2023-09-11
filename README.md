@@ -69,6 +69,7 @@ To run the solution to this test, one can install this repo as a package:
     pip install git+https://github.com/nicklamiller/rs_take_home.git
 
 Then all one needs to do is import `get_association_counts`:
+
     from rs_take_home.run import get_association_counts
 
     association_counts = get_association_counts()
@@ -108,3 +109,14 @@ This code is written using Pyspark. Because it was ran on my laptop, it is ran i
 * Parallelization:
 
 As mentioned above, one could choose a different spark session configuration that involves multiple nodes/workers and pass this spark session to the `get_association_counts` function to better parallelize the code.
+
+
+### Tools used in this repo:
+
+This repo is made from a [CI/CD template](https://github.com/nicklamiller/CICD_template) I've created that includes several developer tools I've found useful. Among these include:
+
+* Automated tests:
+  * linting - flake8 and wemake-python-styleguide are used
+  * unit tests - pytest frame work for testing public methods
+* virtual environment management - poetry is used to manage dependencies and to build the package using masonry
+* precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as linting
