@@ -90,7 +90,7 @@ And then these commands in an interactive python session to use `get_association
     )
     association_counts.show()
 
-If can also supply queries as an argument with a list of tuples that correspond to custom queries. The default queries used here are those specified in the problem statement and will return the example output also listed in the problem statement.
+One can also supply queries as an argument with a list of tuples that correspond to custom queries. The default queries used here are those specified in the problem statement and will return the example output also listed in the problem statement.
 
 ---
 
