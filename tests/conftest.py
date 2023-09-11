@@ -36,8 +36,8 @@ def gene_disease_queries():
 def query_counts_df(spark_session):
     return spark_session.createDataFrame([
         Row(Query='(ENSG00000101342, MONDO:0019557)', Result=4),
-        Row(Query='(ENSG00000101347, MONDO:0015574)', Result=3),
         Row(Query='(ENSG00000213689, MONDO:0019557)', Result=4),
+        Row(Query='(ENSG00000101347, MONDO:0015574)', Result=3),
         Row(Query='(ENSG00000213689, MONDO:0018827)', Result=3),
     ])
 
