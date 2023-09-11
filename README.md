@@ -102,11 +102,11 @@ If can also supply queries as an argument with a list of tuples that correspond 
 
 * Corruped data/queries:
 
-There is built in validation when one supplies their own spark dataframes, so these dataframes will have to contain the correct columns and datatypes as specified in `rs_take_home.schemas` (they can include additional columns as well). Given more time I would like to add validation for the Ensembl and EFO ID's for the queries using regex patterns.
+There is built in validation when one supplies their own data/filepaths to data, so these dataframes will have to contain the correct columns and datatypes as specified in `rs_take_home.schemas` (they can include additional columns as well). Given more time I would like to add validation for the Ensembl and EFO ID's for the queries using regex patterns.
 
 * Optimize solution:
 
-This code is written using Pyspark. Because it was ran on my laptop, it is ran in SingleNode cluster mode, but one could supply a SparkSession with custom configurations that include multiple workers and/or a higher spec driver/workers. This configuration can then be passed as an argument to the `get_association_counts` function to help scale this solution.
+This code is written using Pyspark. Because it was ran on my laptop, it is ran in SingleNode cluster mode, but one could supply a SparkSession with custom configurations that include multiple workers and/or a higher spec driver/workers. This spark session can then be passed as an argument to the `get_association_counts` function to help scale this solution.
 
 * Parallelization:
 
@@ -123,3 +123,5 @@ This repo is made from a [CI/CD template](https://github.com/nicklamiller/CICD_t
 * Virtual environment management/ package building - poetry is used to manage dependencies and to build this repo as a package using masonry
 * Precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as calling the automated linter
 * Input/data validation - pydantic is used to both validate attributes of classes upon instantiation, and to validate the contents of those attributes. In this case I validate the schemas of the input dataframes.
+* Incremental PR's - code is developed incrementally and a PR is opened for code review (of course for this I was the only reviewer 😅 but for non-take-home-test projects I would gladly tag peers and get their feedback).
+  * I would also normally create tickets on Jira, use these tickets to prefix branch names, and use Atlassian's [github-for-jira](https://github.com/atlassian/github-for-jira) integration so that branches/PR's are tracked on Jira (naturally other project management tools like Azure Boards offer github integration and could be used similarly).
