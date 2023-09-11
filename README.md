@@ -117,8 +117,8 @@ As mentioned above, one could choose a different spark session configuration tha
 This repo is made from a [CI/CD template](https://github.com/nicklamiller/CICD_template) I've created that includes several developer tools I've found useful. Among these include:
 
 * Automated tests:
-  * linting - flake8 and wemake-python-styleguide are used
-  * unit tests - pytest frame work for testing public methods
-* virtual environment management/ package building - poetry is used to manage dependencies and to build this repo as a package using masonry
-* precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as calling the automated linter
-* input/data validation - pydantic is used to both validate attributes of classes upon instantiation, and to validate the contents of those attributes. In this case I validate the schemas of the input dataframes.
+  * Linting - flake8 and wemake-python-styleguide are used
+  * Unit tests - pytest frame work for testing public methods
+* Virtual environment management/ package building - poetry is used to manage dependencies and to build this repo as a package using masonry
+* Precommit hooks - file and link checks as specified in `.pre-commit-config.yaml`, as well as calling the automated linter
+* Input/data validation - pydantic is used to both validate attributes of classes upon instantiation, and to validate the contents of those attributes. In this case I validate the schemas of the input dataframes.
