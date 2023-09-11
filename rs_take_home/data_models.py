@@ -25,19 +25,6 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
 
     df: DataFrame
 
-    @classmethod
-    def from_filepath(cls, filepath: str, spark: SparkSession):
-        """Instantiate from filepath config.
-
-        Args:
-            filepath (str): filepath to gene disease associations csv
-            spark (SparkSession): spark session allowing custom spark configs
-
-        Returns:
-            GeneDiseaseAssociations
-        """
-        return cls(df=spark_read_csv(filepath, spark))
-
     @validator('df')
     @classmethod
     def check_schema(cls, value):
@@ -54,6 +41,19 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
             schemas.gene_disease_associations_schema,
         )
         return value
+
+    @classmethod
+    def from_filepath(cls, filepath: str, spark: SparkSession):
+        """Instantiate from filepath config.
+
+        Args:
+            filepath (str): filepath to gene disease associations csv
+            spark (SparkSession): spark session allowing custom spark configs
+
+        Returns:
+            GeneDiseaseAssociations
+        """
+        return cls(df=spark_read_csv(filepath, spark))
 
     def count_associations(
         self,
