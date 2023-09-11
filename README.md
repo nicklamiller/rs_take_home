@@ -1,3 +1,5 @@
+[![CI - Test](https://github.com/nicklamiller/rs_take_home/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/nicklamiller/rs_take_home/actions/workflows/unit-tests.yml)
+
 ## Table of Contents
 * [Problem](#problem)
 * [Solution](#solution)
