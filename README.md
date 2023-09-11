@@ -105,7 +105,7 @@ There is built in validation when one supplies their own spark dataframes, so th
 
 * Optimize solution:
 
-This code is written using Pyspark. Because it was ran on my laptop, it is ran in SingleNode cluster mode, but one could supply a SparkSession with custom configurations/multiple workers as an argument to the `get_association_counts` function and could reap the benefits of a multi-node computing configuration.
+This code is written using Pyspark. Because it was ran on my laptop, it is ran in SingleNode cluster mode, but one could supply a SparkSession with custom configurations that include multiple workers and/or a higher spec driver/workers. This configuration can then be passed as an argument to the `get_association_counts` function to help scale this solution.
 
 * Parallelization:
 
