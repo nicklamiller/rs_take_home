@@ -73,7 +73,9 @@ Then all one needs to do is import `get_association_counts`:
     association_counts = get_association_counts()
     association_counts.show()
 
-The function call above will run with defaults, which are the data files supplied in the `data` folder and the example queries given in the problem statement. This will return the example output also listed in the problem statement. One can also supply their own spark dataframes to and get the association counts:
+The function call above will run with defaults, which are the data files supplied in the `data` folder and the example queries given in the problem statement. This will return the example output also listed in the problem statement.
+
+One can also supply their own spark dataframes to and get the association counts:
 
 
     gene_disease_associations_df = spark.read.csv(...)
