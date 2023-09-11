@@ -117,7 +117,7 @@ As mentioned above, one could choose a different spark session configuration tha
 
 This repo is made from a [CI/CD template](https://github.com/nicklamiller/CICD_template) I've created that includes several developer tools I've found useful. Among these include:
 
-* Automated tests:
+* Automated tests with GitHub Actions:
   * Linting - flake8 and wemake-python-styleguide are used
   * Unit tests - pytest frame work for testing public methods
 * Virtual environment management/ package building - poetry is used to manage dependencies and to build this repo as a package using masonry
