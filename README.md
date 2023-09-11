@@ -1,5 +1,8 @@
-##### Table of Contents
+# Table of Contents
 [Problem Statement](#problem_statement)
+[Solution](#solution)
+
+---
 
 <a name="problem_statement"/>
 
@@ -54,3 +57,19 @@ Some things worth considering (though not necessarily crucial):
 Please send back your solution as a zip file containing the code and any other files you think are relevant. If you
 prefer to send a link to a GitHub repository with your solution instead of the zip file, that's also acceptable.
 Note that the solution should be self-contained and include any necessary instructions to use it.
+
+---
+
+<a name="solution"/>
+
+## Solution
+To run the solution to this test, one can install this repo as a package:
+    pip install git+https://github.com/nicklamiller/rs_take_home.git
+
+Then all one needs to do is import `get_association_counts`:
+    from rs_take_home.run import get_association_counts
+
+    association_counts = get_association_counts()
+    association_counts.show()
+
+The function call above will run with defaults, which are the data files supplied in the `data` folder and the example queries given in the problem statement. This will return the example output also listed in the problem statement.
