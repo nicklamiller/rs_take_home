@@ -1,8 +1,14 @@
+##### Table of Contents
+[Problem Statement](#problem_statement)
+
+<a name="problem_statement"/>
+
+## Problem
 ### Introduction
 In the field of genomics, understanding the relationships between genes and diseases is crucial. This task revolves
 around assessing these relationships, especially when considering hierarchical disease ontology.
 
-### Problem
+### Problem Statement
 
 Write a Python application that takes as input:
   1. list of gene-disease associations,
