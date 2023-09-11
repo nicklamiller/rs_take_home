@@ -64,6 +64,7 @@ Note that the solution should be self-contained and include any necessary instru
 
 ## Solution
 To run the solution to this test, one can install this repo as a package:
+
     pip install git+https://github.com/nicklamiller/rs_take_home.git
 
 Then all one needs to do is import `get_association_counts`:
