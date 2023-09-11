@@ -68,28 +68,30 @@ To run the solution to this test, one can install this repo as a package:
 
     pip install git+https://github.com/nicklamiller/rs_take_home.git
 
-Then all one needs to do is import `get_association_counts`:
+Then all one needs to do is import `get_association_counts` and supply filepaths to data. If you don't have the data readily available feel free to run these commands to get the data locally:
+
+    mkdir data
+    curl -o "data/example_associations.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/add-explanation-to-readme/data/example_associations.csv
+    curl -o "data/example_disease_hierarchy.csv" https://github.com/nicklamiller/rs_take_home/blob/add-explanation-to-readme/data/example_disease_hierarchy.csv
+
+
+And then these commands in an interactive python session to use the function to count associations:
 
     from rs_take_home.run import get_association_counts
 
-    association_counts = get_association_counts()
-    association_counts.show()
 
-The function call above will run with defaults, which are the data files supplied in the `data` folder and the example queries given in the problem statement. This will return the example output also listed in the problem statement.
-
-One can also supply their own input:
-
-
-    gene_disease_associations_df = spark.read.csv(...)
-    disease_hierarchy_df = spark.read.csv(...)
+    gene_disease_associations_path = 'data/example_associations.csv'
+    disease_hierarchy_path = 'data/example_disease_hierarchy.csv'
     queries = [('ENSG00000101342', 'MONDO:0019557'), ('ENSG00000101347', 'MONDO:0015574')]
 
     association_counts = get_association_counts(
-        gene_disease_associations_df=gene_disease_associations_df,
-        disease_hierarchy_df=disease_hierarchy_df,
+        gene_disease_associations_path=gene_disease_associations_path,
+        disease_hierarchy_path=disease_hierarchy_path,
         queries=queries,
     )
     association_counts.show()
+
+If one leaves queries empty, it will run with the default queries givein in the problem statement. This will return the example output also listed in the problem statement.
 
 ---
 
