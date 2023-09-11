@@ -118,10 +118,17 @@ class AssociationCounter(BaseModelArbitrary):
     def _add_related_ids(
         self,
         df: DataFrame,
-        *,
+        *,  # noqa: DAR101, DAR201
         join_column: str,
         id_to_add_column: str,
     ) -> DataFrame:
+        """Add related ids.
+
+        Here we assume queries are relatively small compared to
+        disease hierarchy and associations, so the queries dataframe is
+        broadcast to help prevent unnecessary shuffling between workers
+        if the spark configuration had high concurrency.
+        """
         return (
             fx.broadcast(df)
             .join(
