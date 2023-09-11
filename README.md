@@ -1,4 +1,4 @@
-[![CI - Test](https://github.com/nicklamiller/rs_take_home/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/nicklamiller/rs_take_home/actions/workflows/unit-tests.yml)
+[![CI - Lint and Test](https://github.com/nicklamiller/rs_take_home/actions/workflows/pr.yml/badge.svg)](https://github.com/nicklamiller/rs_take_home/actions/workflows/pr.yml)
 
 ## Table of Contents
 * [Problem](#problem)
