@@ -70,7 +70,7 @@ To run the solution to this test, one can install this repo as a package:
 
     pip install git+https://github.com/nicklamiller/rs_take_home.git
 
-Then all one needs to do is import `get_association_counts` and supply filepaths to data (and optionally custom queries). If you don't have the data readily available feel free to run these commands to get the data locally:
+This package uses Pyspark, so one needs to have [Java](https://www.oracle.com/java/technologies/downloads/#java8-linux) also installed in their environment/on their machine. Then all one needs to do is import `get_association_counts` and supply filepaths to data (and optionally custom queries). If you don't have the data readily available feel free to run these commands to get the data locally:
 
     mkdir data
     curl -o "data/example_associations.csv" https://raw.githubusercontent.com/nicklamiller/rs_take_home/main/data/example_associations.csv
