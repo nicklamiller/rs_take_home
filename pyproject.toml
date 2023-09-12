@@ -25,6 +25,7 @@ pre-commit = "^2.20.0"
 coverage = "^6.5.0"
 pytest-spark = "^0.6.0"
 pyspark-test = "^0.2.0"
+pytest-lazy-fixture = "^0.6.3"
 
 [build-system]
 requires = ["poetry-core"]
