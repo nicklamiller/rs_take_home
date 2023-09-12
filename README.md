@@ -66,7 +66,7 @@ Note that the solution should be self-contained and include any necessary instru
 <a name="solution"/>
 
 ## Solution
-To run the solution to this test, one can install this repo as a package:
+This repo and its dependencies use Python 3.10 as specified in the `pyproject.toml` file, if you are using a different version, I recommend using [pyenv](https://github.com/pyenv/pyenv) for python version management. Once using python 3.10, to run the solution to this test, one can install this repo as a package:
 
     pip install git+https://github.com/nicklamiller/rs_take_home.git
 
