@@ -98,7 +98,7 @@ And then these commands in an interactive python session to use `get_association
     )
     association_counts.show()
 
-Note the queries specified in the above code block are those from the problem statement, so this function call will return the example output also listed in the problem statement.
+Note the queries specified in the above code block are those from the problem statement, so this function call will return the example output also listed in the problem statement (sorted by Result).
 
 ---
 
@@ -120,7 +120,7 @@ I chose to make input queries a spark dataframe so that joins and groupBy operat
 
 * Parallelization:
 
-As mentioned above, one could choose a different spark session configuration that involves multiple nodes/workers and pass this spark session to the `get_association_counts` function to better parallelize the code.
+As mentioned above, one could choose a different spark session configuration that involves multiple nodes/workers and pass this spark session to the `spark` argument of `get_association_counts` function to better parallelize the code.
 
 
 ### Tools used in this repo:
