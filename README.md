@@ -98,7 +98,7 @@ And then these commands in an interactive python session to use `get_association
     )
     association_counts.show()
 
-Note the queries specified in the above code block are those from the problem statement, so this function call will return the example output also listed in the problem statement.
+Note the queries specified in the above code block are those from the problem statement, so this function call will return the example output also listed in the problem statement (sorted by Result).
 
 ---
 
