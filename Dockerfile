@@ -27,10 +27,6 @@ RUN tar -xvzf spark-3.0.3-bin-hadoop3.2.tgz && \
     rm -r spark-3.0.3-bin-hadoop3.2.tgz && \
     rm -r spark-3.0.3-bin-hadoop3.2/
 
-# Downloads Postgres jars
-RUN mkdir -p /opt/spark/extra_jars/
-RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.25.jre6.jar && mv postgresql-42.2.25.jre6.jar /opt/spark/extra_jars/
-
 # Set PATHs
 ENV SPARK_HOME /opt/spark
 ENV PATH $PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
