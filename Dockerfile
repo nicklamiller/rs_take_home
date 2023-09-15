@@ -41,6 +41,7 @@ RUN export PATH=$PATH:$JAVA_HOME/bin
 COPY log4j.properties /opt/spark/conf/
 
 # Install Python libraries
+RUN curl -sSL https://install.python-poetry.org | python3 -
 COPY pyproject.toml .
 COPY poetry.lock .
-RUN pip install -r requirements.txt --no-cache-dir
+RUN poetry install
