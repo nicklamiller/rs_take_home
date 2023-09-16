@@ -8,7 +8,7 @@ env:
 
 jobs:
   flake8:
-    name: Python - Flake8
+    name: Python - Flake8 and Mypy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

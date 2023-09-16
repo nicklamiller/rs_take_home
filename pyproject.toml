@@ -23,6 +23,7 @@ coverage = "^6.5.0"
 pytest-spark = "^0.6.0"
 pyspark-test = "^0.2.0"
 pytest-lazy-fixture = "^0.6.3"
+mypy = "^1.5.1"
 
 [build-system]
 requires = ["poetry-core"]
