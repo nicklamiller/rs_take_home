@@ -21,7 +21,10 @@ def _create_spark_session() -> SparkSession:
     )
 
 
-_gene_disease_queries = [
+_default_spark_session = _create_spark_session()
+
+
+_gene_disease_queries: List[tuple] = [
     ('ENSG00000101342', 'MONDO:0019557'),
     ('ENSG00000101347', 'MONDO:0015574'),
     ('ENSG00000213689', 'MONDO:0019557'),
@@ -34,7 +37,7 @@ def get_association_counts(
     gene_disease_associations_path: str,
     disease_hierarchy_path: str,
     list_of_queries: List[tuple] = _gene_disease_queries,
-    spark: SparkSession = None,
+    spark: SparkSession = _default_spark_session,
 ) -> DataFrame:
     """Get disease gene association counts for all queries.
 
@@ -47,8 +50,6 @@ def get_association_counts(
     Returns:
         association counts (DataFrame): dataframe summarizing counts
     """
-    if not spark:
-        spark = _create_spark_session()
     disease_hierarchy = DiseaseHierarchy.from_filepath(
         disease_hierarchy_path, spark,
     )
