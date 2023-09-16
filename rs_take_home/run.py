@@ -24,7 +24,7 @@ def _create_spark_session() -> SparkSession:
 _default_spark_session = _create_spark_session()
 
 
-_gene_disease_queries = [
+_gene_disease_queries: List[tuple] = [
     ('ENSG00000101342', 'MONDO:0019557'),
     ('ENSG00000101347', 'MONDO:0015574'),
     ('ENSG00000213689', 'MONDO:0019557'),
