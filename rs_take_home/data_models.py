@@ -11,8 +11,6 @@ from rs_take_home.utils import check_has_required_schema_subset, spark_read_csv
 
 _logger = logging.getLogger(__name__)
 
-_disease_id_parent_col = 'disease_id_parent'
-_disease_id_child_col = 'disease_id_child'
 _disease_id_col = 'disease_id'
 _gene_id_col = 'gene_id'
 _query_col = 'Query'
