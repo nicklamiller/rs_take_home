@@ -10,6 +10,13 @@ from rs_take_home.data_models import (
     Queries,
 )
 
+_gene_disease_queries: List[tuple] = [
+    ('ENSG00000101342', 'MONDO:0019557'),
+    ('ENSG00000101347', 'MONDO:0015574'),
+    ('ENSG00000213689', 'MONDO:0019557'),
+    ('ENSG00000213689', 'MONDO:0018827'),
+]
+
 
 def _create_spark_session() -> SparkSession:
     return (
@@ -21,23 +28,12 @@ def _create_spark_session() -> SparkSession:
     )
 
 
-_default_spark_session = _create_spark_session()
-
-
-_gene_disease_queries: List[tuple] = [
-    ('ENSG00000101342', 'MONDO:0019557'),
-    ('ENSG00000101347', 'MONDO:0015574'),
-    ('ENSG00000213689', 'MONDO:0019557'),
-    ('ENSG00000213689', 'MONDO:0018827'),
-]
-
-
 def get_association_counts(
     *,
     gene_disease_associations_path: str,
     disease_hierarchy_path: str,
     list_of_queries: List[tuple] = _gene_disease_queries,
-    spark: SparkSession = _default_spark_session,
+    spark: SparkSession = _create_spark_session(),  # noqa: B008, WPS404
 ) -> DataFrame:
     """Get disease gene association counts for all queries.
 
