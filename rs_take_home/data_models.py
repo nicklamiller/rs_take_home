@@ -1,4 +1,5 @@
 """Data models for inputs."""
+import logging
 from typing import List
 
 from pydantic import BaseModel, validator
@@ -7,6 +8,8 @@ from pyspark.sql import functions as fx
 
 from rs_take_home import schemas
 from rs_take_home.utils import check_has_required_schema_subset, spark_read_csv
+
+_logger = logging.getLogger(__name__)
 
 _disease_id_parent_col = 'disease_id_parent'
 _disease_id_child_col = 'disease_id_child'
@@ -34,6 +37,7 @@ class Queries(BaseModelArbitrary):
         Returns:
             DataFrame: dataframe representation of queries
         """
+        _logger.info(f'{len(self.queries) = }')
         return (
             self.spark.createDataFrame(
                 data=self.queries,
