@@ -71,6 +71,7 @@ class GeneDiseaseAssociations(BaseModelArbitrary):
         Returns:
             ValueError: column and type not in df schema
         """
+        _logger.debug(f'GeneDiseaseAssociations schema: {value.schema}')
         check_has_required_schema_subset(
             value,
             schemas.gene_disease_associations_schema,
@@ -107,6 +108,7 @@ class DiseaseHierarchy(BaseModelArbitrary):
         Returns:
             ValueError: column and type not in df schema
         """
+        _logger.debug(f'DiseaseHierarchy schema: {value.schema}')
         check_has_required_schema_subset(
             value,
             schemas.disease_hierarchy_schema,
