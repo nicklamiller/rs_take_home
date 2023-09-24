@@ -1,4 +1,5 @@
 """Main entrypoint to count disease associations based on queries."""
+import logging
 from typing import List
 
 from pyspark.sql import DataFrame, SparkSession
@@ -10,6 +11,14 @@ from rs_take_home.data_models import (
     Queries,
 )
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s.%(msecs)03d:%(levelname)s:%(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+)
+_logger = logging.getLogger('rs_take_home')
+
+
 _gene_disease_queries: List[tuple] = [
     ('ENSG00000101342', 'MONDO:0019557'),
     ('ENSG00000101347', 'MONDO:0015574'),
@@ -19,13 +28,15 @@ _gene_disease_queries: List[tuple] = [
 
 
 def _create_spark_session() -> SparkSession:
-    return (
+    spark_session = (
         SparkSession
         .builder
         .master('local[1]')
         .appName('main')
         .getOrCreate()
     )
+    spark_session.sparkContext.setLogLevel('ERROR')
+    return spark_session
 
 
 def get_association_counts(
@@ -46,6 +57,7 @@ def get_association_counts(
     Returns:
         association counts (DataFrame): dataframe summarizing counts
     """
+    _logger.info('Inputs being generated')
     disease_hierarchy = DiseaseHierarchy.from_filepath(
         disease_hierarchy_path, spark,
     )
@@ -53,6 +65,7 @@ def get_association_counts(
     gene_disease_associations = GeneDiseaseAssociations.from_filepath(
         gene_disease_associations_path, spark,
     )
+    _logger.info('Query association count starting')
     association_counter = AssociationCounter(
         disease_hierarchy=disease_hierarchy,
         gene_disease_associations=gene_disease_associations,
